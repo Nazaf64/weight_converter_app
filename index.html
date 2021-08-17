@@ -20,51 +20,54 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <h1 class="display-4 text-center">Weight Converter</h1>
-
-                <!-- Options to select what kind of weight needs converting -->
-                <select name="weight" id="weight-option" class="col-md-6 offset-md-3 mb-2">
-                    <option value="pounds">Pounds</option>
-                    <option value="kilograms">Kilograms</option>
-                    <option value="ounces">Ounces</option>
-                </select>
-
-                <form>
-                    <div class="form-group">
-                        <input type="text" 
-                        id="lbsInput" 
-                        class="form-control form-control-lg"
-                        placeholder="Enter Pounds...">
-                    </div>
-                </form>
-                <div id="output">
-                    <div class="card card-primary mb-2">
-                        <div class="card-block">
-                            <h4>Grams:</h4>
-                            <div id="gramsOutput"></div>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <h1 class="display-4 text-center">Weight Converter</h1>
+    
+                    <!-- Options to select what kind of weight needs converting -->
+                    <select name="weight" id="weight-option" class="col-md-6 offset-md-3 mb-2">
+                        <option value="pounds">Pounds</option>
+                        <option value="kilograms">Kilograms</option>
+                        <option value="ounces">Ounces</option>
+                    </select>
+    
+                    <form>
+                        <div class="form-group">
+                            <input type="text" 
+                            id="lbsInput" 
+                            class="form-control form-control-lg"
+                            placeholder="Enter Pounds...">
                         </div>
-                    </div>
-
-                    <div class="card card-success mb-2">
-                        <div class="card-block">
-                            <h4>Kilograms:</h4>
-                            <div id="kgOutput"></div>
+                    </form>
+                    <div id="output">
+                        <div class="card card-primary mb-2">
+                            <div class="card-block">
+                                <h4>Grams:</h4>
+                                <div id="gramsOutput"></div>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="card card-danger mb-2">
-                        <div class="card-block">
-                            <h4>Ounces:</h4>
-                            <div id="ozOutput"></div>
+    
+                        <div class="card card-success mb-2">
+                            <div class="card-block">
+                                <h4>Kilograms:</h4>
+                                <div id="kgOutput"></div>
+                            </div>
+                        </div>
+    
+                        <div class="card card-danger mb-2">
+                            <div class="card-block">
+                                <h4>Ounces:</h4>
+                                <div id="ozOutput"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
+    
 
     <script>
         // Keep the different Fields hidden at first
@@ -90,16 +93,46 @@
         document.getElementById("weight-option").addEventListener("click", function(e){
                 weightType = e.target.value;
                 setPlaceholder();
+                weightConversion();
         });
 
         // Weight Conversion
-        document.getElementById("lbsInput").addEventListener('input',function(e){
-            if(e.target.value === ""){
+        // document.getElementById("lbsInput").addEventListener('input',function(e){
+        //     if(e.target.value === ""){
+        //         document.getElementById('output').style.visibility = "hidden";
+        //     } else {
+        //         document.getElementById('output').style.visibility = "visible";
+        //     }
+        //     let weight = e.target.value;
+            
+        //     // Pounds
+        //     if(weightType === "pounds"){
+        //         document.getElementById('gramsOutput').innerHTML = weight/0.0022046;
+        //         document.getElementById('kgOutput').innerHTML = weight/2.2046;
+        //         document.getElementById('ozOutput').innerHTML = weight*16;
+        //     } else if (weightType === "kilograms") {
+        //         document.getElementById('gramsOutput').innerHTML = weight*1000;
+        //         document.getElementById('kgOutput').innerHTML = weight;
+        //         document.getElementById('ozOutput').innerHTML = weight*35.27396;
+        //     } else {
+        //         document.getElementById('gramsOutput').innerHTML = weight*28.34952;
+        //         document.getElementById('kgOutput').innerHTML = weight*0.02834952;
+        //         document.getElementById('ozOutput').innerHTML = weight;
+        //     }        
+        // })
+
+        document.getElementById("lbsInput").addEventListener('input',weightConversion)
+
+        
+        function weightConversion(){
+            let weight = document.getElementById("lbsInput").value;
+            if(weight === ""){
                 document.getElementById('output').style.visibility = "hidden";
             } else {
                 document.getElementById('output').style.visibility = "visible";
             }
-            let weight = e.target.value;
+            // let weight = e.target.value;
+            
             
             // Pounds
             if(weightType === "pounds"){
@@ -115,8 +148,7 @@
                 document.getElementById('kgOutput').innerHTML = weight*0.02834952;
                 document.getElementById('ozOutput').innerHTML = weight;
             }
-               
-        })       
+        }
     </script>
 </body>
 </html>
